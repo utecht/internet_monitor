@@ -1,0 +1,17 @@
+FROM python:3.9-slim
+
+WORKDIR /app
+
+COPY dashboard.py /app/dashboard.py
+COPY templates /app/templates
+
+RUN pip install flask pandas matplotlib
+
+RUN mkdir -p /data
+
+VOLUME ["/data"]
+
+EXPOSE 9000
+
+CMD ["python", "dashboard.py"]
+

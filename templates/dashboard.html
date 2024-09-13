@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Internet Uptime Monitor</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { width: 90%; margin: auto; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        table, th, td { border: 1px solid #ddd; }
+        th, td { padding: 8px; text-align: center; }
+        th { background-color: #f2f2f2; }
+        .chart { text-align: center; margin-top: 20px; }
+        .summary { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Internet Uptime Monitor</h1>
+        <div class="summary">
+            <p>Total Outages: {{ total_outages }}</p>
+            <p>Total Downtime: {{ total_downtime }} seconds</p>
+        </div>
+        <div class="chart">
+            <img src="data:image/png;base64,{{ chart_url }}" alt="Outage Chart">
+        </div>
+        <h2>Recent Outages</h2>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                <th>Duration (seconds)</th>
+            </tr>
+            {% for outage in outages %}
+            <tr>
+                <td>{{ outage['id'] }}</td>
+                <td>{{ outage['start_time'] }}</td>
+                <td>{{ outage['end_time'] }}</td>
+                <td>{{ outage['duration'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
+

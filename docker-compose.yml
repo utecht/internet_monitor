@@ -1,0 +1,25 @@
+version: '3'
+services:
+  monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile.monitor
+    container_name: internet_monitor
+    volumes:
+      - data:/data
+    restart: always
+
+  dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile.dashboard
+    container_name: internet_dashboard
+    ports:
+      - "9000:9000"
+    volumes:
+      - data:/data
+    restart: always
+
+volumes:
+  data:
+
